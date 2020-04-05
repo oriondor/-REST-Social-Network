@@ -26,7 +26,10 @@ def analytics():
 
 @api_bpt.route('/api/activity/<username>', methods=['POST','GET'])
 def activity(username):
-	user = mongo.db.users.find_one_or_404({'username':username})
+	try:
+		user = mongo.db.users.find_one_or_404({'username':username})
+	except:
+		return jsonify({'error':"User is not found"})
 	try:
 		activity = user['log_activity']
 	except:

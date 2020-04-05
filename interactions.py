@@ -76,13 +76,32 @@ class Interactions:
 		req = requests.get(endpoint, headers=headers)
 		print(json_util.loads(req.content))
 
+	def analytics(self):
+		headers = {'Content-Type':'application/json','x-access-tokens':self.token}
+		print('Working with headers: ', headers)
+		print("\nEnter date in format 2020-03-21\n")
+		date_from = input("Enter date from: ")
+		date_to = input("Enter date to: ")
+		endpoint = f'{self.url}/api/analytics?date_from={date_from}&date_to={date_to}'
+		print(f'redirecting to {endpoint} ...')
+		req = requests.get(endpoint, headers=headers)
+		print(json_util.loads(req.content))
+
+	def activity(self):
+		headers = {'Content-Type':'application/json','x-access-tokens':self.token}
+		print('Working with headers: ', headers)
+		username = input("Enter username: ")
+		endpoint = f'{self.url}/api/activity/{username}'
+		req = requests.get(endpoint, headers=headers)
+		print(json_util.loads(req.content))
+
 
 i=0
 inter = Interactions('http://127.0.0.1:5000')
 while i!='q':
 	actions = ['0. logout', '1. login', '2. register', '3. view posts', '4. new post',
-	'5. like post', '6. dislike post', '7. view profile', '8. del post by id']
-	print("\n__________\n")
+	'5. like post', '6. dislike post', '7. view profile', '8. del post by id', '9. aggregate likes', '10. show user activity']
+	print("\n__________begin\n")
 	for action in actions:
 		print(action)
 	i = input("Выберите действие:\n")
@@ -104,3 +123,9 @@ while i!='q':
 		inter.view_profile()
 	elif i=='8':
 		inter.delete('post_by_id')
+	elif i=='9':
+		inter.analytics()
+	elif i=='10':
+		inter.activity()
+
+	print('_________end')
