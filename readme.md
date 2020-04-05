@@ -12,3 +12,7 @@ Before you run this API you should consider installing virtualenv. Every needed 
 Also you should export some environment variables that are in env.txt file.
 To run website - simply do flask run
 To run interactions - python interactions.py
+
+
+DATABASE
+This API uses MongoDB. In order to connect your database, create config.py file and add line "mongo_uri='path/to/database'"
