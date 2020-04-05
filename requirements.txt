@@ -1,0 +1,5 @@
+requests
+flask
+flask-pymongo
+pyjwt
+werkzeug==0.16.0
